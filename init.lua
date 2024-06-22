@@ -864,7 +864,7 @@ require('lazy').setup({
       'windwp/nvim-ts-autotag',
     },
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'css', 'svelte', 'astro' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'javascript', 'css', 'svelte', 'astro' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -883,7 +883,7 @@ require('lazy').setup({
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'css', 'astro', 'svelte' },
+        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'javascript', 'css', 'astro', 'svelte' },
       }
 
       require('nvim-ts-autotag').setup {
@@ -899,6 +899,7 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+  --neogit
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -910,6 +911,12 @@ require('lazy').setup({
       'ibhagwan/fzf-lua', -- optional
     },
     config = true,
+  },
+  -- ts-tools
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
