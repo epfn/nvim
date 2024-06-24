@@ -677,6 +677,7 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -864,7 +865,7 @@ require('lazy').setup({
       'windwp/nvim-ts-autotag',
     },
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'javascript', 'css', 'svelte', 'astro' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'javascript', 'css', 'svelte' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -883,7 +884,27 @@ require('lazy').setup({
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'javascript', 'css', 'astro', 'svelte' },
+        ensure_installed = {
+          'bash',
+          'c',
+          'diff',
+          'html',
+          'lua',
+          'luadoc',
+          'markdown',
+          'vim',
+          'vimdoc',
+          'typescript',
+          'javascript',
+          'css',
+          'astro',
+          'svelte',
+          'scss',
+        },
+        auto_install = true,
+        highlight = {
+          enable = true,
+        },
       }
 
       require('nvim-ts-autotag').setup {
@@ -935,6 +956,26 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   -- require 'kickstart.plugins.autotag',
+  --
+  -- require 'kickstart.plugins.package-info',
+  --
+  -- -- Install a new dependency
+  -- vim.api.nvim_set_keymap('n', '<leader>ni', "<cmd>lua require('package-info').install()<cr>", { silent = true, noremap = true }),
+  -- -- Show dependency versions
+  -- vim.api.nvim_set_keymap('n', '<leader>ns', "<cmd>lua require('package-info').show()<cr>", { silent = true, noremap = true }),
+  -- -- Hide dependency versions
+  -- vim.api.nvim_set_keymap('n', '<leader>nc', "<cmd>lua require('package-info').hide()<cr>", { silent = true, noremap = true }),
+  -- -- Toggle dependency versions
+  -- vim.api.nvim_set_keymap('n', '<leader>nt', "<cmd>lua require('package-info').toggle()<cr>", { silent = true, noremap = true }),
+  --
+  -- -- Update dependency on the line
+  -- vim.api.nvim_set_keymap('n', '<leader>nu', "<cmd>lua require('package-info').update()<cr>", { silent = true, noremap = true }),
+  --
+  -- -- Delete dependency on the line
+  -- vim.api.nvim_set_keymap('n', '<leader>nd', "<cmd>lua require('package-info').delete()<cr>", { silent = true, noremap = true }),
+  --
+  -- -- Install a different dependency version
+  -- vim.api.nvim_set_keymap('n', '<leader>np', "<cmd>lua require('package-info').change_version()<cr>", { silent = true, noremap = true }),
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
