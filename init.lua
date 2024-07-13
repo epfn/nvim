@@ -101,7 +101,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- See `:help mapleader`
 
 if vim.g.neovide then
-  vim.o.guifont = 'Cascadia Mono NF:h11:#h-none' -- text below applies for VimScript
+  vim.o.guifont = 'Cascadia Mono NF:h11.5:#h-none' -- text below applies for VimScript
   vim.opt.linespace = 2
 end
 
@@ -299,19 +299,17 @@ require('lazy').setup({
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+      require('which-key').add {
+        {
+          { '<leader>c', group = '[C]ode' },
+          { '<leader>d', group = '[D]ocument' },
+          { '<leader>r', group = '[R]ename' },
+          { '<leader>s', group = '[S]earch' },
+          { '<leader>w', group = '[W]orkspace' },
+          { '<leader>t', group = '[T]oggle' },
+          { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        },
       }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
     end,
   },
 
@@ -722,6 +720,12 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local s = luasnip.snippet
+      local t = luasnip.text_node
+      local i = luasnip.insert_node
+      local extras = require 'luasnip.extras'
+      local fmt = require('luasnip.extras.fmt').fmt
+
       luasnip.config.setup {}
 
       cmp.setup {
@@ -781,6 +785,83 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
+          luasnip.add_snippets('astro', { s('fl', { t 'fluid(', i(1), t ')' }) }),
+
+          luasnip.add_snippets('astro', {
+            s(
+              'is',
+              fmt(
+                [[
+            @include section;
+
+            &__container {{
+              grid-area: center;
+              {}
+            }}
+
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
+
+          luasnip.add_snippets('astro', {
+            s(
+              'il',
+              fmt(
+                [[
+            @include laptop {{
+              {}
+            }}
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
+
+          luasnip.add_snippets('astro', {
+            s(
+              'it',
+              fmt(
+                [[
+            @include tablet {{
+              {}
+            }}
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
+
+          luasnip.add_snippets('astro', {
+            s(
+              'ip',
+              fmt(
+                [[
+            @include phone {{
+              {}
+            }}
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
+
+          luasnip.add_snippets('astro', {
+            s(
+              'ih',
+              fmt(
+                [[
+            @include hover {{
+              &:hover {{
+                {}
+              }}
+            }}
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
@@ -938,6 +1019,13 @@ require('lazy').setup({
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     opts = {},
+  },
+
+  {
+    'NvChad/nvim-colorizer.lua',
+    opts = {
+      sass = { enable = false, parsers = { 'css' } }, -- Enable sass colors
+    },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
