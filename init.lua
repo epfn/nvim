@@ -674,6 +674,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
+        astro = { { 'prettierd', 'prettier' } },
         javascript = { { 'prettierd', 'prettier' } },
         typescript = { { 'prettierd', 'prettier' } },
       },
@@ -785,11 +786,19 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
-          luasnip.add_snippets('astro', { s('fl', { t 'fluid(', i(1), t ')' }) }),
+          -- snippet fluid
+          luasnip.add_snippets('astro', { s('fluid', { t 'fluid(', i(1), t ')' }) }),
 
+          -- snippet transition
+          luasnip.add_snippets('astro', { s('stransition', { t 'transition: ', i(1), t ' $transition;' }) }),
+
+          -- snippet astro props
+          luasnip.add_snippets('astro', { s('aprops', { t 'const {', i(1), t '} = Astro.props;' }) }),
+
+          -- snippet section
           luasnip.add_snippets('astro', {
             s(
-              'is',
+              'isection',
               fmt(
                 [[
             @include section;
@@ -805,9 +814,10 @@ require('lazy').setup({
             ),
           }),
 
+          -- snippet laptop
           luasnip.add_snippets('astro', {
             s(
-              'il',
+              'ilaptop',
               fmt(
                 [[
             @include laptop {{
@@ -819,9 +829,10 @@ require('lazy').setup({
             ),
           }),
 
+          -- snippet tablet
           luasnip.add_snippets('astro', {
             s(
-              'it',
+              'itablet',
               fmt(
                 [[
             @include tablet {{
@@ -833,9 +844,10 @@ require('lazy').setup({
             ),
           }),
 
+          -- snippet phone
           luasnip.add_snippets('astro', {
             s(
-              'ip',
+              'iphone',
               fmt(
                 [[
             @include phone {{
@@ -846,10 +858,10 @@ require('lazy').setup({
               )
             ),
           }),
-
+          -- snippet hover
           luasnip.add_snippets('astro', {
             s(
-              'ih',
+              'ihover',
               fmt(
                 [[
             @include hover {{
@@ -857,6 +869,20 @@ require('lazy').setup({
                 {}
               }}
             }}
+            ]],
+                { i(1) }
+              )
+            ),
+          }),
+          -- snippet style
+          luasnip.add_snippets('astro', {
+            s(
+              'astyle',
+              fmt(
+                [[
+<style is:global lang="scss">
+  {}
+</style>
             ]],
                 { i(1) }
               )
